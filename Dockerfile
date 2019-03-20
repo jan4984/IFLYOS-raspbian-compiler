@@ -8,7 +8,7 @@ RUN install-debian --update libtool pkg-config wget lbzip2
 RUN install-raspbian --update libssl-dev libgstreamer-plugins-base1.0-dev \
     libgstreamer1.0-dev libsqlite3-dev libasound2-dev libgstreamer-plugins-base1.0-dev libopus-dev
 
-ENV LDLAGS="--sysroot=${SYSROOT}"
+ENV LDFLAGS="--sysroot=${SYSROOT}"
 ENV CFLAGS="--sysroot=${SYSROOT}"
 ENV PATH=${PATH}:/rpxc/bin/
 ENV PKG_CONFIG_PATH=${SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:/rpxc/sysroot/lib/pkgconfig/
