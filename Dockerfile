@@ -5,8 +5,8 @@ RUN apt update
 RUN apt-get -t jessie-backports install -y cmake
 RUN install-debian --update libtool pkg-config wget lbzip2
 
-RUN install-raspbian --update libssl-dev libgstreamer-plugins-base1.0-dev \
-    libgstreamer1.0-dev libsqlite3-dev libasound2-dev libgstreamer-plugins-base1.0-dev libopus-dev
+RUN install-raspbian --update libssl-dev libgstreamer-plugins-base1.0-dev libatlas-base-dev \
+    libgstreamer1.0-dev libsqlite3-dev libasound2-dev libgstreamer-plugins-base1.0-dev libopus-dev 
 
 ENV LDFLAGS="--sysroot=${SYSROOT}"
 ENV CFLAGS="--sysroot=${SYSROOT}"
