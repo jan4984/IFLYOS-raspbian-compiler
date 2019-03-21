@@ -29,17 +29,19 @@ RUN ln -s /rpxc/arm-linux-gnueabihf/libc/usr/lib/arm-linux-gnueabihf /usr/lib/ar
 
 #install nghttp2 from source
 RUN cd /tmp && git clone https://github.com/tatsuhiro-t/nghttp2.git && cd nghttp2 \
-    && autoreconf -i && automake && autoconf && ./configure --prefix=$SYSROOT --host=${HOST} && make && make install
+    && autoreconf -i && automake && autoconf && ./configure --prefix=$SYSROOT --host=${HOST} && make && make install \
+    && cd /tmp && rm -rf *
 
 #install curl with http2 support
-RUN cd /tmp && wget https://curl.haxx.se/download/curl-7.64.0.tar.bz2 \
-    && tar xf curl-7.64.0.tar.bz2 &&  cd curl-7.64.0 \
-    && ./configure --prefix=$SYSROOT --host=$HOST --with-nghttp2 --with-ssl && make && make install
+RUN cd /tmp && wget https://curl.haxx.se/download/curl-7.54.0.tar.bz2 \
+    && tar xf curl-7.54.0.tar.bz2 &&  cd curl-7.54.0 \
+    && ./configure --prefix=$SYSROOT --host=$HOST --with-nghttp2 --with-ssl && make && make install \
+    && cd /tmp && rm -rf *
 
 #install portaudio dev
 RUN wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz && tar xf pa_stable_v190600_20161030.tgz \
     && cd portaudio && ./configure --prefix=$SYSROOT --without-oss --with-alsa --without-jack --host=$HOST \
-    && make && make install
+    && make && make install && cd /tmp && rm -rf *
 
 #==============till now we have a development envirement, following start build IFLYOS===========================
 
