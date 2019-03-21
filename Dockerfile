@@ -16,6 +16,12 @@ ENV PKG_CONFIG_PATH=${SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:/rpxc/sysro
 #replace prefix definition from '/usr' to $SYSROOT/usr
 RUN for pc in `ls /rpxc/sysroot/usr/lib/arm-linux-gnueabihf/pkgconfig/*.pc`; \
     do sed -i 's/prefix=\/usr/prefix=\/rpxc\/sysroot\/usr/' $pc; done
+    
+#replace libstdc++6.0.19 to libstdc++6.0.20
+RUN rm /rpxc/arm-linux-gnueabihf/lib/libstdc++.so
+RUN ln -s /rpxc/sysroot/usr/lib/arm-linux-gnueabihf/libstdc++.so.6.0.20 /rpxc/arm-linux-gnueabihf/lib/libstdc++.so
+RUN rm /rpxc/arm-linux-gnueabihf/lib/libstdc++.so.6
+RUN ln -s /rpxc/sysroot/usr/lib/arm-linux-gnueabihf/libstdc++.so.6 /rpxc/arm-linux-gnueabihf/lib/libstdc++.so.6
 
 #or curl ./configure fail
 RUN ln -s /rpxc/sysroot/lib/arm-linux-gnueabihf /lib/arm-linux-gnueabihf
