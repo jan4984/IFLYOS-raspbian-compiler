@@ -1,4 +1,4 @@
-FROM sdthirlwall/raspberry-pi-cross-compiler:jessie
+FROM ccr.ccs.tencentyun.com/dev-runtime/raspberry-pi-cross-compiler:gcc4.9.4
 
 RUN echo 'deb http://deb.debian.org/debian jessie-backports main' >> /etc/apt/sources.list
 RUN apt update
