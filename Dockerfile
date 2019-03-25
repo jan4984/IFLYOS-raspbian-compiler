@@ -3,7 +3,7 @@ FROM ccr.ccs.tencentyun.com/dev-runtime/raspberry-pi-cross-compiler:gcc4.9.4
 #need cmake 3.10+
 RUN install-debian --update libtool pkg-config wget lbzip2
 RUN cd /tmp && wget https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0.tar.gz && tar xf cmake-3.14.0.tar.gz \
-  && cd cmake-3.14.0 && ./bootstrap && apt remove -y cmake && make && make install && rm -rf /tmp/cmake* && ln -s /usr/bin/cmake /usr/local/bin/cmake
+  && cd cmake-3.14.0 && ./bootstrap && apt remove -y cmake && make && make install && rm -rf /tmp/cmake* && ln -s /usr/local/bin/cmake /usr/bin/cmake
 
 #for China poor INTERNATIONAL-network
 #RUN rpdo sed -i 's/archive.raspbian.org/mirrors.tuna.tsinghua.edu.cn\\/raspbian/' /etc/apt/sources.list
