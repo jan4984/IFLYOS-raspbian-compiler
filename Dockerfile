@@ -1,14 +1,15 @@
 FROM ccr.ccs.tencentyun.com/dev-runtime/raspberry-pi-cross-compiler:gcc4.9.4
 
-RUN echo 'deb http://deb.debian.org/debian jessie-backports main' >> /etc/apt/sources.list
-#for China poor INTERNATIONAL-network
-RUN rpdo sed -i 's/archive.raspbian.org/mirrors.tuna.tsinghua.edu.cn\\/raspbian/' /etc/apt/sources.list
-RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/' /etc/apt/sources.list
-
-RUN apt update
 #need cmake 3.10+
-RUN apt-get -t jessie-backports install -y cmake
+RUN cd /tmp && wget https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0.tar.gz && tar xf cmake-3.14.0.tar.gz \
+  && cd cmake-3.14.0 && ./bootstrap && apt remove -y cmake && make && make install && rm -rf /tmp/cmake* && ln -s /usr/bin/cmake /usr/local/bin/cmake
+
+#for China poor INTERNATIONAL-network
+#RUN rpdo sed -i 's/archive.raspbian.org/mirrors.tuna.tsinghua.edu.cn\\/raspbian/' /etc/apt/sources.list
+#RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/' /etc/apt/sources.list
+
 RUN install-debian --update libtool pkg-config wget lbzip2
+
 RUN install-raspbian --update libssl-dev libgstreamer-plugins-base1.0-dev libatlas-base-dev \
     libgstreamer1.0-dev libsqlite3-dev libasound2-dev libgstreamer-plugins-base1.0-dev libopus-dev 
 
